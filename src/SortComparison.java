@@ -6,7 +6,7 @@ import java.util.Arrays;
  *  This class contains static methods that implementing sorting of an array of numbers
  *  using different sort algorithms.
  *
- *  @author
+ *  @author	Yi Xiang Tan a.k.a dabreadman
  *  @version HT 2020
  */
 
@@ -142,29 +142,22 @@ class SortComparison {
 	 */
 
 	static double[] mergeSortIterative (double a[]) {
-		int maxSize = a.length;
-		for(int partitionSize=2;partitionSize<maxSize;partitionSize++) {
-			//bottom up
-			int startingIndex=0;
-			//compare two partition
-			int left = startingIndex;
-			int right = startingIndex+partitionSize;
-			boolean done = false;
-			while(!done) {
-				if(a[left]<=a[right]) {
-					left++;
-				}
-				else {
-					swap(a,left++,right);
-				}
+		sortIterative(a);
+		return a;
+	}
 
+	 static void sortIterative(double[] a) {
+		int len = a.length;
+		double[] aux = new double[len];
+		//bottom up
+		for(int size = 1; size<len; size*=2) {
+			//merge from bottom
+			for(int left = 0; left<len-size; left+=2*size) {
+				merge(a, aux, left, left+size-1,(left+2*size-1<len-1? left+2*size-1:len-1));
 			}
 		}
-		//todo: implement the sort
-		return null;
-	}//end mergesortIterative
-
-
+		
+	}
 
 	/**
 	 * Sorts an array of doubles using recursive implementation of Merge Sort.
@@ -238,16 +231,15 @@ class SortComparison {
 
 	public static void main(String[] args) {
 		System.out.println("hello");
-		double a[] = new double[] {2377.88,2910.66,8458.14,1522.08,600.44,504.04,5482.36,2371.34};
+		double a[] = new double[] {1,2,3,4,5,6,7,8,9,10,-1,-1,-1,-1,-1,-1,-1};
 		long start = System.currentTimeMillis();
 		System.out.println(Arrays.toString(a));
-		mergeSortRecursive(a);
+		mergeSortIterative(a);
 		System.out.println(Arrays.toString(a));
 		long end = System.currentTimeMillis();
 		System.out.println(end - start + "ns");
 		System.out.println(isSorted(a));
-		//todo: do experiments as per assignment instructions
 	}
 
-}//end class
+}
 
