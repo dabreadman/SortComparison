@@ -20,6 +20,7 @@ class SortComparison {
 	 *
 	 */
 	static double [] insertionSort (double a[]){
+		if(a==null) return null;
 		//select
 		for (int i=1; i<a.length;i++) {
 			int index=i;
@@ -41,6 +42,7 @@ class SortComparison {
 	 *
 	 */
 	static double [] selectionSort (double a[]){
+		if(a==null) return null;
 		//outer for loop
 		for(int i=0; i<a.length;i++) {
 			double min = a[i];
@@ -66,7 +68,7 @@ class SortComparison {
 	 *
 	 */
 	static double [] quickSort (double a[]){
-
+		if(a==null) return null;
 		quickSort(a,0,a.length-1); 
 		return a;
 	}
@@ -142,6 +144,7 @@ class SortComparison {
 	 */
 
 	static double[] mergeSortIterative (double a[]) {
+		if(a==null) return null;
 		sortIterative(a);
 		return a;
 	}
@@ -167,6 +170,7 @@ class SortComparison {
 	 * @return after the method returns, the array must be in ascending sorted order.
 	 */
 	static double[] mergeSortRecursive (double a[]) {
+		if(a==null) return null;
 		sort(a,new double[a.length], 0,a.length-1);
 		return a;
 	}
@@ -216,30 +220,5 @@ class SortComparison {
 		a[index1] = a[index2];
 		a[index2] = temp;
 	}
-
-	/**
-	 * Check if a double array is sorted.
-	 * @param a: the array to be checked.
-	 * @return 1 if sorted, 0 if not.
-	 */
-	static boolean isSorted(double a[]) {
-		for(int i=0;i<a.length-1;i++) {
-			if(a[i]>a[i+1]) return false;
-		}
-		return true;
-	}
-
-	public static void main(String[] args) {
-		System.out.println("hello");
-		double a[] = new double[] {1,2,3,4,5,6,7,8,9,10,-1,-1,-1,-1,-1,-1,-1};
-		long start = System.currentTimeMillis();
-		System.out.println(Arrays.toString(a));
-		mergeSortIterative(a);
-		System.out.println(Arrays.toString(a));
-		long end = System.currentTimeMillis();
-		System.out.println(end - start + "ns");
-		System.out.println(isSorted(a));
-	}
-
 }
 
